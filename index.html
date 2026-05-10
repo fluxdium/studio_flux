@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FLUX - 메디컬 시각화 전문 스튜디오</title>
+<meta name="description" content="메디컬 시각화 전문 스튜디오">
+
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+  :root {
+    --flux-navy: #17367a;
+  }
+
+  html {
+    overflow-y: scroll;
+  }
+
+  body { 
+    font-family: 'Pretendard', sans-serif !important; 
+    background-color: #fafafa;
+    color: #0f172a;
+    word-break: keep-all;
+  }
+
+  .page-view {
+    display: none;
+    animation: pageFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .page-view.active {
+    display: block;
+  }
+  @keyframes pageFadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .bg-grid-line {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.12) 1px, transparent 1px), 
+                      linear-gradient(to bottom, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center top;
+  }
+
+  .text-glow-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 65% 50% at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 40%, rgba(255, 255, 255, 0) 80%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .btn-flux {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    border: 1px solid rgba(37, 99, 235, 0.7); 
+    color: #1e40af; 
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.45rem 1.25rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .btn-flux:hover {
+    background-color: var(--flux-navy);
+    border-color: var(--flux-navy);
+    color: #ffffff;
+  }
+  .btn-flux svg {
+    margin-top: -1px; 
+  }
+
+  .btn-solid {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--flux-navy);
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.45rem 1.25rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--flux-navy);
+    box-shadow: 0 4px 14px 0 rgba(23, 54, 122, 0.25);
+  }
+  .btn-solid-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .btn-solid:hover .btn-solid-inner {
+    transform: scale(1.08);
+  }
+  .btn-solid svg {
+    margin-top: -1px; 
+  }
+
+  .nav-link {
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.2s ease;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--flux-navy);
+    transition: width 0.3s ease-out;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: var(--flux-navy) !important;
+  }
+  .nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+</head>
+
+<body class="antialiased relative">
+
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <div class="flex h-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 items-center justify-between">
+      
+      <div class="flex-1 flex justify-start">
+        <a href="javascript:void(0)" onclick="navigateTo('home')" class="flex items-center shrink-0">
+          <img src="./src/flux_logo_color.png" alt="FLUX" class="h-5 md:h-6 object-contain" onerror="this.src='https://via.placeholder.com/100x30/ffffff/17367a?text=FLUX'">
+        </a>
+      </div>
+      
+      <nav class="flex items-center justify-center gap-5 md:gap-10 text-[13px] sm:text-[15px] font-medium text-slate-600 overflow-x-auto scrollbar-hide whitespace-nowrap px-2 pt-2">
+        <a href="javascript:void(0)" onclick="navigateTo('about')" id="nav-about" class="nav-link">About</a>
+        <a href="javascript:void(0)" onclick="navigateTo('portfolio', 'all')" id="nav-portfolio" class="nav-link">Work</a>
+        <a href="javascript:void(0)" onclick="navigateTo('contact')" id="nav-contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="flex-1 flex justify-end shrink-0">
+        <a href="https://www.youtube.com/@studio_flux/videos" target="_blank" class="inline-flex items-center justify-center rounded-md border border-slate-300 px-2 sm:px-3 py-1.5 hover:bg-slate-50 transition-colors">
+          <img src="./src/flux_logo_youtube.png" alt="YouTube" class="h-2.5 sm:h-3 object-contain" onerror="this.src='https://via.placeholder.com/40x16/ff0000/ffffff?text=YT'">
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="page-home" class="page-view active">
+      <section class="relative w-full h-[480px] flex items-center overflow-hidden bg-[#eef2f6] border-b border-slate-200/60">
+        <div class="absolute inset-0 pointer-events-none bg-grid-line z-0"></div>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-[0.65] blur-[1px]" autoplay loop muted playsinline>
+          <source src="./src/flux_video_1.mp4" type="video/mp4">
+        </video>
+        <div class="text-glow-overlay"></div>
+        <div class="max-w-6xl mx-auto px-6 w-full relative z-20 text-center flex flex-col items-center">
+          <p class="text-[11px] md:text-[13px] font-black tracking-[0.30em] pl-[0.22em] text-slate-800 uppercase mb-6">MEDICAL • COMMERCIAL • 3D STUDIO</p>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-snug md:leading-[1.5] mb-5">
+            정교한 메디컬 메커니즘부터<br>
+            감각적인 커머셜 필름까지<br>
+          </h1>
+          <p class="text-[14px] md:text-[18px] text-slate-900 font-bold max-w-2xl mx-auto leading-relaxed">
+            플럭스는 직관적인 3D 시각화 솔루션을 제공합니다.
+          </p>
+          <div class="mt-8 flex items-center justify-center gap-4">
+            <button onclick="navigateTo('portfolio', 'all')" class="btn-flux bg-white/70 backdrop-blur-md">
+              <i data-lucide="layout-grid" class="w-4 h-4"></i> View Work
+            </button>
+            <button onclick="navigateTo('contact')" class="btn-flux bg-white/70 backdrop-blur-md">
+              <i data-lucide="send" class="w-4 h-4"></i> Contact
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-8">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            
+            <a href="javascript:void(0)" onclick="navigateTo('portfolio', 'medical')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
+              <img src="./src/flux_main_01.jpg" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
+              <div class="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent"></div>
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                <div>
+                  <p class="text-[10px] font-black text-[#17367a] uppercase mb-0.5">Medical</p>
+                  <p class="text-sm font-bold text-slate-900 tracking-tight">메디컬 영상</p>
+                </div>
+              </div>
+            </a>
+            
+            <a href="javascript:void(0)" onclick="navigateTo('portfolio', 'device')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
+              <img src="./src/flux_main_02.jpg" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
+              <div class="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent"></div>
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                <div>
+                  <p class="text-[10px] font-black text-[#17367a] uppercase mb-0.5">Device</p>
+                  <p class="text-sm font-bold text-slate-900 tracking-tight">의료기기 홍보 영상</p>
+                </div>
+              </div>
+            </a>
+            
+            <a href="javascript:void(0)" onclick="navigateTo('portfolio', 'mechanism')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
+              <img src="./src/flux_main_03.jpg" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
+              <div class="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent"></div>
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                <div>
+                  <p class="text-[10px] font-black text-[#17367a] uppercase mb-0.5">Mechanism</p>
+                  <p class="text-sm font-bold text-slate-900 tracking-tight">논문 & 기전 영상</p>
+                </div>
+              </div>
+            </a>
+            
+            <a href="javascript:void(0)" onclick="navigateTo('portfolio', 'commercial')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
+              <img src="./src/flux_main_04.jpg" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
+              <div class="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent"></div>
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                <div>
+                  <p class="text-[10px] font-black text-[#17367a] uppercase mb-0.5">Commercial</p>
+                  <p class="text-sm font-bold text-slate-900 tracking-tight">커머셜 & 브랜드 필름</p>
+                </div>
+              </div>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="py-10">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div class="lg:col-span-6">
+              <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5 leading-tight">
+                복잡함을 명쾌함으로 바꾸는<br>최적화된 프로세스
+              </h2>
+              <p class="text-slate-600 text-[15px] font-medium leading-relaxed mb-8">
+                엄격한 메디컬 그래픽과 기초과학 논문 시각화 등 고도의 전문성이 요구되는 특수 영역에서도, 다년간 쌓아온 제작 노하우를 통해 작업 리스크를 최소화하고 클라이언트가 요구하는 정확한 결과물을 완성합니다.
+              </p>
+              <button onclick="navigateTo('about')" class="btn-solid">
+                <span class="btn-solid-inner"><i data-lucide="arrow-right" class="w-4 h-4"></i> About FLUX</span>
+              </button>
+            </div>
+            <div class="lg:col-span-6">
+              <div class="rounded-xl border border-slate-200 overflow-hidden shadow-sm bg-white p-2">
+                <img src="./src/flux_main_05.jpg" class="w-full h-[360px] object-cover rounded-lg">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-10 px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="relative rounded-2xl border border-slate-200 bg-white p-8 md:p-12 shadow-sm">
+            <div class="grid lg:grid-cols-12 gap-10 items-center">
+              <div class="lg:col-span-6">
+                <div class="relative rounded-xl overflow-hidden border border-slate-100 shadow-md">
+                  <img src="./src/flux_main_06.jpg" class="w-full h-80 object-cover">
+                </div>
+              </div>
+              <div class="lg:col-span-6 lg:pl-4">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#17367a]"></span>
+                  <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold">Featured Project</p>
+                </div>
+                <h3 class="text-3xl font-black text-slate-900 mb-4 tracking-tight leading-snug">제이시스메디컬 <br>고주파 멜라닌 억제 기전</h3>
+                <p class="text-slate-600 text-sm font-medium mb-8 leading-relaxed">
+                  고주파 시술이 멜라닌 합성을 억제하고 자가포식을 유도하며, 림프관 신생을 통해 과침착된 색소를 제거하는 복잡한 기전을 시각화했습니다.
+                </p>
+                <button onclick="navigateTo('portfolio', 'all')" class="btn-solid">
+                  <span class="btn-solid-inner"><i data-lucide="compass" class="w-4 h-4"></i> Explore Project</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-12 text-center px-6 mb-8">
+        <div class="max-w-3xl mx-auto">
+          <p class="text-[10px] font-black tracking-[0.3em] text-[#17367a] uppercase mb-4">Let's work together</p>
+          <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5 leading-tight">
+            플럭스와 함께 <br>완성도 높은 프로젝트를 시작하세요.
+          </h2>
+          <p class="text-slate-500 text-[15px] font-medium mb-8">
+            정확한 컨셉 분석과 트렌디한 연출을 통해 클라이언트의 기획을 최상의 결과물로 구현합니다.
+          </p>
+          <button onclick="navigateTo('contact')" class="btn-solid !px-8 !py-3">
+            <span class="btn-solid-inner"><i data-lucide="mail" class="w-4 h-4"></i> Contact Us</span>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <div id="page-about" class="page-view pb-12">
+      
+      <div class="max-w-6xl mx-auto px-6 pt-12">
+        <div class="mb-10 flex items-center text-sm font-bold text-slate-400">
+          <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-[#17367a] transition">Home</a>
+          <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
+          <span class="text-[#17367a]">About</span>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-8">
+          <div class="pr-0 lg:pr-8">
+            <p class="text-[11px] font-black tracking-[0.2em] text-[#17367a] uppercase mb-3">About FLUX</p>
+            <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-6">데이터의 정확성에<br>시각적 깊이를 더합니다.</h2>
+            <p class="text-slate-600 text-[16px] leading-relaxed mb-6">
+              플럭스(FLUX)는 폭넓은 프로젝트 경험과 확실한 실무 능력을 갖춘 3D 영상 디자이너가 이끄는 메디컬·커머셜 시각화 전문 스튜디오입니다.
+            </p>
+            <p class="text-slate-600 text-[16px] leading-relaxed">
+              의료기기, 논문 기전, 대규모 병원 프로젝트 등 단순한 디자인을 넘어 복잡한 기전과 구동 원리를 완벽하게 이해하고 직관적인 결과물로 완성합니다.
+            </p>
+          </div>
+          <div class="relative mt-8 lg:mt-0">
+            <img src="./src/flux_about_01.jpg" class="rounded-xl shadow-lg w-full h-[400px] object-cover border border-slate-200">
+            <div class="absolute -bottom-6 -right-4 md:-right-8 bg-white p-5 rounded-2xl shadow-xl border border-slate-100 flex gap-6 items-center">
+              <div class="text-center">
+                <p class="text-3xl font-black text-[#17367a] mb-1">19<span class="text-xl">+</span></p>
+                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Years</p>
+              </div>
+              <div class="w-px h-10 bg-slate-200"></div>
+              <div class="text-center">
+                <p class="text-3xl font-black text-[#17367a] mb-1"><i data-lucide="infinity" class="w-8 h-8 inline-block"></i></p>
+                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Projects</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white py-12 border-y border-slate-200 mt-12 mb-8 shadow-sm">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="text-center mb-10">
+            <p class="text-[11px] font-black tracking-[0.2em] text-[#17367a] uppercase mb-3">Capabilities</p>
+            <h3 class="text-3xl md:text-4xl font-black text-slate-900">전문 분야</h3>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 text-center">
+            
+            <div onclick="navigateTo('portfolio', 'medical')" class="group flex flex-col items-center cursor-pointer">
+              <div class="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200 shadow-md flex items-center justify-center mb-6 transition duration-300 group-hover:border-[#17367a]">
+                <i data-lucide="microscope" class="w-7 h-7 text-slate-800 transition duration-300 group-hover:text-[#17367a] group-hover:scale-110"></i>
+              </div>
+              <h4 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#17367a] transition">Medical</h4>
+              <p class="text-sm text-slate-500 leading-relaxed break-keep">해부학적 지식을 바탕으로 인체 내부와 복잡한 수술 과정을 정밀하게 시각화합니다.</p>
+            </div>
+            
+            <div onclick="navigateTo('portfolio', 'device')" class="group flex flex-col items-center cursor-pointer">
+              <div class="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200 shadow-md flex items-center justify-center mb-6 transition duration-300 group-hover:border-[#17367a]">
+                <i data-lucide="monitor-play" class="w-7 h-7 text-slate-800 transition duration-300 group-hover:text-[#17367a] group-hover:scale-110"></i>
+              </div>
+              <h4 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#17367a] transition">Device</h4>
+              <p class="text-sm text-slate-500 leading-relaxed break-keep">의료기기 및 제품의 기술력을 라이팅과 렌더링을 통해 브랜드 필름으로 완성합니다.</p>
+            </div>
+            
+            <div onclick="navigateTo('portfolio', 'mechanism')" class="group flex flex-col items-center cursor-pointer">
+              <div class="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200 shadow-md flex items-center justify-center mb-6 transition duration-300 group-hover:border-[#17367a]">
+                <i data-lucide="dna" class="w-7 h-7 text-slate-800 transition duration-300 group-hover:text-[#17367a] group-hover:scale-110"></i>
+              </div>
+              <h4 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#17367a] transition">Mechanism</h4>
+              <p class="text-sm text-slate-500 leading-relaxed break-keep">기초과학 논문의 난해한 데이터와 특수 기전을 분석하여 3D 메커니즘으로 구현합니다.</p>
+            </div>
+
+            <div onclick="navigateTo('portfolio', 'commercial')" class="group flex flex-col items-center cursor-pointer">
+              <div class="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200 shadow-md flex items-center justify-center mb-6 transition duration-300 group-hover:border-[#17367a]">
+                <i data-lucide="clapperboard" class="w-7 h-7 text-slate-800 transition duration-300 group-hover:text-[#17367a] group-hover:scale-110"></i>
+              </div>
+              <h4 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#17367a] transition">Commercial</h4>
+              <p class="text-sm text-slate-500 leading-relaxed break-keep">기업 및 브랜드의 기술력을 돋보이게 하는 3D 프로모션 영상을 통해 비즈니스를 돕습니다.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-6 py-12">
+        <div class="text-center mb-12">
+          <p class="text-[11px] font-black tracking-[0.2em] text-[#17367a] uppercase mb-3">Workflow</p>
+          <h3 class="text-3xl md:text-4xl font-black text-slate-900">제작 프로세스</h3>
+        </div>
+        
+        <div class="max-w-4xl mx-auto relative pl-4 md:pl-0">
+          <div class="absolute left-8 md:left-1/2 top-4 bottom-4 w-px bg-slate-200 md:-translate-x-1/2 z-0"></div>
+
+          <div class="relative flex flex-col md:flex-row items-center mb-10 md:mb-0">
+            <div class="absolute left-8 md:left-1/2 w-10 h-10 rounded-full bg-[#17367a] border-4 border-[#fafafa] shadow-sm flex items-center justify-center font-bold text-white text-lg -translate-x-1/2 z-10">1</div>
+            <div class="w-full md:w-1/2 pl-20 md:pl-0 md:pr-14">
+              <div class="bg-white border border-slate-200 rounded-xl p-8 shadow-sm text-left">
+                <h4 class="text-xl font-bold text-slate-900 mb-3">Pre-Production</h4>
+                <p class="text-slate-600 text-[15px] leading-relaxed break-keep">전문 자료 수집 및 클라이언트 요구사항을 분석합니다. 기획 단계에서 AI 툴을 활용하여 효율적으로 시각화 방향을 모색하고, 명확한 연출의 뼈대를 완성합니다.</p>
+              </div>
+            </div>
+            <div class="hidden md:block md:w-1/2"></div>
+          </div>
+
+          <div class="relative flex flex-col md:flex-row items-center mb-10 md:mb-0 md:-mt-8">
+            <div class="absolute left-8 md:left-1/2 w-10 h-10 rounded-full bg-[#17367a] border-4 border-[#fafafa] shadow-sm flex items-center justify-center font-bold text-white text-lg -translate-x-1/2 z-10">2</div>
+            <div class="hidden md:block md:w-1/2"></div>
+            <div class="w-full md:w-1/2 pl-20 md:pl-14">
+              <div class="bg-white border border-slate-200 rounded-xl p-8 shadow-sm text-left">
+                <h4 class="text-xl font-bold text-slate-900 mb-3">Modeling & Asset</h4>
+                <p class="text-slate-600 text-[15px] leading-relaxed break-keep">확보한 데이터를 바탕으로 3D 에셋을 제작합니다. 모델링의 형태와 질감을 구현하고 구조적 오류를 검증합니다. 전체적인 형태감과 디테일한 질감을 꼼꼼하게 다듬어 시각적 기반을 단단히 다집니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative flex flex-col md:flex-row items-center mb-10 md:mb-0 md:-mt-8">
+            <div class="absolute left-8 md:left-1/2 w-10 h-10 rounded-full bg-[#17367a] border-4 border-[#fafafa] shadow-sm flex items-center justify-center font-bold text-white text-lg -translate-x-1/2 z-10">3</div>
+            <div class="w-full md:w-1/2 pl-20 md:pl-0 md:pr-14">
+              <div class="bg-white border border-slate-200 rounded-xl p-8 shadow-sm text-left">
+                <h4 class="text-xl font-bold text-slate-900 mb-3">Animation & Rendering</h4>
+                <p class="text-slate-600 text-[15px] leading-relaxed break-keep">기획에 맞춘 카메라 워크와 오브젝트 모션을 설정합니다. 라이팅 및 시뮬레이션 작업을 적용하여 3D 렌더링을 진행합니다.</p>
+              </div>
+            </div>
+            <div class="hidden md:block md:w-1/2"></div>
+          </div>
+
+          <div class="relative flex flex-col md:flex-row items-center md:-mt-8">
+            <div class="absolute left-8 md:left-1/2 w-10 h-10 rounded-full bg-[#17367a] border-4 border-[#fafafa] shadow-sm flex items-center justify-center font-bold text-white text-lg -translate-x-1/2 z-10">4</div>
+            <div class="hidden md:block md:w-1/2"></div>
+            <div class="w-full md:w-1/2 pl-20 md:pl-14">
+              <div class="bg-white border border-slate-200 rounded-xl p-8 shadow-sm text-left">
+                <h4 class="text-xl font-bold text-slate-900 mb-3">Post-Production</h4>
+                <p class="text-slate-600 text-[15px] leading-relaxed break-keep">렌더링된 영상에 2D 모션, 자막, 사운드를 합성합니다. 마스터링 작업을 거쳐 클라이언트가 요구하는 규격으로 납품합니다.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="page-portfolio" class="page-view py-12 px-6 max-w-6xl mx-auto">
+      
+      <div class="mb-6 flex items-center text-sm font-bold text-slate-400">
+        <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-[#17367a] transition">Home</a>
+        <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
+        <span class="text-[#17367a]">Work</span>
+      </div>
+
+      <div class="mb-8">
+        <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">프로젝트</h2>
+      </div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between border-b border-slate-200 pb-4 mb-8 text-sm font-bold">
+        <div class="flex items-center gap-2 md:gap-5 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-hide whitespace-nowrap">
+          <span class="text-slate-400 mr-1">Filter:</span>
+          <button data-filter="all" onclick="applyFilter('all')" class="filter-btn bg-blue-100 text-[#17367a] px-3 py-1.5 rounded-md transition">All</button>
+          <button data-filter="medical" onclick="applyFilter('medical')" class="filter-btn text-slate-500 hover:text-[#17367a] px-2 py-1.5 transition">Medical</button>
+          <button data-filter="device" onclick="applyFilter('device')" class="filter-btn text-slate-500 hover:text-[#17367a] px-2 py-1.5 transition">Device</button>
+          <button data-filter="mechanism" onclick="applyFilter('mechanism')" class="filter-btn text-slate-500 hover:text-[#17367a] px-2 py-1.5 transition">Mechanism</button>
+          <button data-filter="commercial" onclick="applyFilter('commercial')" class="filter-btn text-slate-500 hover:text-[#17367a] px-2 py-1.5 transition">Commercial</button>
+        </div>
+        <div class="hidden md:flex items-center text-slate-400 gap-1.5">
+          <i data-lucide="layout-grid" class="w-4 h-4"></i>
+          <span id="work-count">10 works</span>
+        </div>
+      </div>
+
+      <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <a data-category="mechanism" href="javascript:void(0)" onclick="openModal('mvgLdVK8X-s')" class="portfolio-item group relative overflow-hidden rounded-xl border border-slate-200 hover:border-[#17367a] transition block shadow-sm bg-white cursor-pointer">
+          <div class="relative w-full aspect-video overflow-hidden bg-slate-100">
+            <img src="./src/flux_work_01.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
+            </div>
+          </div>
+          <div class="p-5">
+            <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">MECHANISM</p>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2">제이시스메디칼 고주파 멜라닌 억제 기전</h3>
+            <p class="text-sm text-slate-500 line-clamp-2">고주파의 멜라닌 합성 억제, 자가포식 유도, 림프관 신생을 통한 색소침착 개선 기전 시각화.</p>
+          </div>
+        </a>
+
+        <a data-category="device" href="javascript:void(0)" onclick="openModal('mvgLdVK8X-s')" class="portfolio-item group relative overflow-hidden rounded-xl border border-slate-200 hover:border-[#17367a] transition block shadow-sm bg-white cursor-pointer">
+          <div class="relative w-full aspect-video overflow-hidden bg-slate-100">
+            <img src="./src/flux_work_02.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
+            </div>
+          </div>
+          <div class="p-5">
+            <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">DEVICE</p>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2">제이시스메디칼 덴서티 알파팁</h3>
+            <p class="text-sm text-slate-500 line-clamp-2">기기 외관 뷰티샷 및 피부 단면을 투과하는 알파팁의 작동 원리를 설명하는 홍보 영상.</p>
+          </div>
+        </a>
+
+        <a data-category="medical" href="javascript:void(0)" onclick="openModal('z2G8yPKpNyI')" class="portfolio-item group relative overflow-hidden rounded-xl border border-slate-200 hover:border-[#17367a] transition block shadow-sm bg-white cursor-pointer">
+          <div class="relative w-full aspect-video overflow-hidden bg-slate-100">
+            <img src="./src/flux_work_03.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
+            </div>
+          </div>
+          <div class="p-5">
+            <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">MEDICAL</p>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2">자생한방병원 안면신경마비 치료 기전</h3>
+            <p class="text-sm text-slate-500 line-clamp-2">안면부 추나요법, 침, 약침, 한약 등 안면신경마비의 단계별 치료 및 회복 과정을 설명하는 시각화 영상.</p>
+          </div>
+        </a>
+
+        <a data-category="medical" href="javascript:void(0)" onclick="openModal('mvgLdVK8X-s')" class="portfolio-item group relative overflow-hidden rounded-xl border border-slate-200 hover:border-[#17367a] transition block shadow-sm bg-white cursor-pointer">
+          <div class="relative w-full aspect-video overflow-hidden bg-slate-100">
+            <img src="./src/flux_work_04.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
+            </div>
+          </div>
+          <div class="p-5">
+            <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">MEDICAL</p>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2">자생한방병원 사고 후유증 신경 및 근육 손상</h3>
+            <p class="text-sm text-slate-500 line-clamp-2">사고의 물리적 충격으로 인한 신경 및 근육 손상 과정 원리를 설명하는 시각화 영상.</p>
+          </div>
+        </a>
+
+        <a data-category="commercial" href="javascript:void(0)" onclick="openModal('mvgLdVK8X-s')" class="portfolio-item group relative overflow-hidden rounded-xl border border-slate-200 hover:border-[#17367a] transition block shadow-sm bg-white cursor-pointer">
+          <div class="relative w-full aspect-video overflow-hidden bg-slate-100">
+            <img src="./src/flux_work_05.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
+            </div>
+          </div>
+          <div class="p-5">
+            <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">COMMERCIAL</p>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2">기아 EV3 2025 World Car Awards</h3>
+            <p class="text-sm text-slate-500 line-clamp-2">기아 EV3, EV5, EV9 3년 연속 월드카어워즈 수상 프로모션 영상.</p>
+          </div>
+        </a>
+
+        <a data-category="commercial" href="javascript:void(0)" onclick="openModal('-6mSHPxPTxY')" class="portfolio-item group relative overflow-hidden rounded-xl border border-slate-200 hover:border-[#17367a] transition block shadow-sm bg-white cursor-pointer">
+          <div class="relative w-full aspect-video overflow-hidden bg-slate-100">
+            <img src="./src/flux_work_06.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
+            </div>
+          </div>
+          <div class="p-5">
+            <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">COMMERCIAL</p>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2">애경 리큐 제트 프로</h3>
+            <p class="text-sm text-slate-500 line-clamp-2">애경 세탁 세제 리큐 제트 프로의 주요 특장점을 직관적으로 풀어낸 제품 프로모션 영상.</p>
+          </div>
+        </a>
+
+        <a data-category="commercial" href="javascript:void(0)" onclick="openModal('OSR6bzS874c')" class="portfolio-item group relative overflow-hidden rounded-xl border border-slate-200 hover:border-[#17367a] transition block shadow-sm bg-white cursor-pointer">
+          <div class="relative w-full aspect-video overflow-hidden bg-slate-100">
+            <img src="./src/flux_work_07.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
+            </div>
+          </div>
+          <div class="p-5">
+            <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">COMMERCIAL</p>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2">세종특별자치시 세종글꽃체</h3>
+            <p class="text-sm text-slate-500 line-clamp-2">세종시 전용 서체의 형태와 의미를 소개하는 타이틀 영상.</p>
+          </div>
+        </a>
+
+        <a data-category="mechanism" href="javascript:void(0)" onclick="openModal('mvgLdVK8X-s')" class="portfolio-item group relative overflow-hidden rounded-xl border border-slate-200 hover:border-[#17367a] transition block shadow-sm bg-white cursor-pointer">
+          <div class="relative w-full aspect-video overflow-hidden bg-slate-100">
+            <img src="./src/flux_work_08.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
+            </div>
+          </div>
+          <div class="p-5">
+            <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">MECHANISM</p>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2">기초과학연구원 인지 및 사회성 연구단 논문 시각화</h3>
+            <p class="text-sm text-slate-500 line-clamp-2">뇌 신경 회로 및 세포 단위 상호작용 등 기초과학 연구 데이터 시각화 영상.</p>
+          </div>
+        </a>
+
+        <a data-category="commercial" href="javascript:void(0)" onclick="openModal('JkaYx4_ue6A')" class="portfolio-item group relative overflow-hidden rounded-xl border border-slate-200 hover:border-[#17367a] transition block shadow-sm bg-white cursor-pointer">
+          <div class="relative w-full aspect-video overflow-hidden bg-slate-100">
+            <img src="./src/flux_work_09.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
+            </div>
+          </div>
+          <div class="p-5">
+            <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">COMMERCIAL</p>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2">국가평생교육진흥원 K-MOOC</h3>
+            <p class="text-sm text-slate-500 line-clamp-2">종편 채널 송출용 K-MOOC 브랜드 캠페인 광고 영상 제작.</p>
+          </div>
+        </a>
+
+        <a data-category="commercial" href="javascript:void(0)" onclick="openModal('EIdp0ADl10Y')" class="portfolio-item group relative overflow-hidden rounded-xl border border-slate-200 hover:border-[#17367a] transition block shadow-sm bg-white cursor-pointer">
+          <div class="relative w-full aspect-video overflow-hidden bg-slate-100">
+            <img src="./src/flux_work_10.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
+            </div>
+          </div>
+          <div class="p-5">
+            <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">COMMERCIAL</p>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight mb-2">한겨레 휴먼테크놀로지어워드 타이틀 패키지</h3>
+            <p class="text-sm text-slate-500 line-clamp-2">시상식 상징 오브제를 활용하여 제작한 어워드 수상 영상.</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <div id="page-contact" class="page-view py-12 px-6 max-w-6xl mx-auto">
+      
+      <div class="mb-10 flex items-center text-sm font-bold text-slate-400">
+        <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-[#17367a] transition">Home</a>
+        <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
+        <span class="text-[#17367a]">Contact</span>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-6">프로젝트 의뢰 및 문의</h2>
+          <p class="text-slate-600 text-[15px] leading-relaxed mb-10">
+            플럭스와의 협업을 원하신다면 아래 연락처나 폼을 통해 편하게 남겨주세요. 남겨주신 내용을 꼼꼼히 검토 후 빠르게 회신해 드리겠습니다.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
+                <i data-lucide="mail" class="w-5 h-5 text-[#17367a]"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Email</p>
+                <a href="mailto:fluxdium@gmail.com" class="text-lg font-medium text-slate-900 hover:text-[#17367a] transition">fluxdium@gmail.com</a>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
+                <i data-lucide="map-pin" class="w-5 h-5 text-[#17367a]"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Studio Base</p>
+                <p class="text-lg font-medium text-slate-900 break-keep">강원특별자치도 원주시 세계로 9,<br>강원혁신지식산업센터 908호</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+          <form action="https://formsubmit.co/fluxdium@gmail.com" method="POST" class="space-y-5">
+            <input type="hidden" name="_captcha" value="false">
+            
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-1.5">회사명 / 담당자명 *</label>
+              <input type="text" name="name" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#17367a] focus:ring-1 focus:ring-[#17367a] transition">
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-1.5">연락처 (이메일 또는 전화번호) *</label>
+              <input type="text" name="contact_info" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#17367a] focus:ring-1 focus:ring-[#17367a] transition">
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-1.5">프로젝트 내용 및 예산</label>
+              <textarea name="message" rows="4" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#17367a] focus:ring-1 focus:ring-[#17367a] transition" placeholder="준비 중인 기획안이나 레퍼런스 링크가 있다면 함께 남겨주세요."></textarea>
+            </div>
+            <button type="submit" class="w-full btn-solid !py-3 !text-base mt-2">
+              <span class="btn-solid-inner">문의 보내기 <i data-lucide="send" class="w-4 h-4 ml-1"></i></span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="text-white bg-[#17367a] mt-8">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="py-5 md:py-6 grid md:grid-cols-2 gap-5 items-center">
+        
+        <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 lg:gap-12">
+          <a href="javascript:void(0)" onclick="navigateTo('home')">
+            <img src="./src/flux_logo_white.png" alt="FLUX" class="h-5 md:h-6 object-contain" onerror="this.src='https://via.placeholder.com/80x25/17367a/ffffff?text=FLUX'">
+          </a>
+          <nav class="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 text-[12px] md:text-[13px] font-medium text-blue-100">
+            <a href="javascript:void(0)" onclick="navigateTo('about')" class="hover:text-white hover:underline transition">About</a>
+            <a href="javascript:void(0)" onclick="navigateTo('portfolio', 'all')" class="hover:text-white hover:underline transition">Work</a>
+            <a href="javascript:void(0)" onclick="navigateTo('contact')" class="hover:text-white hover:underline transition">Contact</a>
+          </nav>
+        </div>
+        
+        <div class="md:text-right text-[11px] md:text-[12px] text-blue-100/70 font-medium">
+          <p>© 2026 FLUX Studio. All rights reserved.</p>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <div id="youtube-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/85 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+    <div class="relative w-full max-w-5xl px-4 md:px-6">
+      <button onclick="closeModal()" class="absolute -top-12 right-4 md:right-6 text-white hover:text-slate-300 transition">
+        <i data-lucide="x" class="w-8 h-8"></i>
+      </button>
+      <div class="relative w-full pt-[56.25%] bg-black rounded-lg overflow-hidden shadow-2xl">
+        <iframe id="youtube-iframe" class="absolute inset-0 w-full h-full border-0" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* 페이지 이동 및 필터 연동 */
+    function navigateTo(pageId, filterCategory = null) {
+      const pages = document.querySelectorAll('.page-view');
+      pages.forEach(p => p.classList.remove('active'));
+
+      const targetPage = document.getElementById('page-' + pageId);
+      if(targetPage) {
+        targetPage.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(l => l.classList.remove('active'));
+      const targetNav = document.getElementById('nav-' + pageId);
+      if(targetNav) targetNav.classList.add('active');
+
+      if (pageId === 'portfolio') {
+        if (filterCategory) {
+          applyFilter(filterCategory);
+        } else {
+          applyFilter('all');
+        }
+      }
+    }
+
+    /* 필터링 로직 */
+    function applyFilter(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-filter') === category) {
+          btn.classList.add('bg-blue-100', 'text-[#17367a]');
+          btn.classList.remove('text-slate-500', 'hover:text-[#17367a]');
+        } else {
+          btn.classList.remove('bg-blue-100', 'text-[#17367a]');
+          btn.classList.add('text-slate-500', 'hover:text-[#17367a]');
+        }
+      });
+
+      const items = document.querySelectorAll('.portfolio-item');
+      let visibleCount = 0;
+      
+      items.forEach(item => {
+        if (category === 'all' || item.getAttribute('data-category') === category) {
+          item.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      const countEl = document.getElementById('work-count');
+      if(countEl) {
+        countEl.innerText = visibleCount + ' works';
+      }
+    }
+
+    /* 유튜브 모달 제어 */
+    const modal = document.getElementById('youtube-modal');
+    const iframe = document.getElementById('youtube-iframe');
+
+    function openModal(videoId) {
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+      }, 10);
+    }
+
+    function closeModal() {
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        iframe.src = ''; 
+      }, 300);
+    }
+
+    modal.addEventListener('click', function(e) {
+      if(e.target === modal) {
+        closeModal();
+      }
+    });
+
+    lucide.createIcons();
+    window.onload = function() { navigateTo('home'); }
+  </script>
+</body>
+</html>
