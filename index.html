@@ -804,3 +804,118 @@
   </script>
 </body>
 </html>
+
+<script>
+    /* 페이지 이동 및 필터 연동 */
+    function navigateTo(pageId, filterCategory = null, isBackAction = false) {
+      const pages = document.querySelectorAll('.page-view');
+      pages.forEach(p => p.classList.remove('active'));
+
+      const targetPage = document.getElementById('page-' + pageId);
+      if(targetPage) {
+        targetPage.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(l => l.classList.remove('active'));
+      const targetNav = document.getElementById('nav-' + pageId);
+      if(targetNav) targetNav.classList.add('active');
+
+      if (pageId === 'portfolio') {
+        if (filterCategory) {
+          applyFilter(filterCategory);
+        } else {
+          applyFilter('all');
+        }
+      }
+
+      // 💡 핵심 추가: 주소창 끝에 #메뉴명을 붙이고, 방문 기록(History) 남기기
+      if (!isBackAction) {
+        history.pushState({ pageId: pageId, filterCategory: filterCategory }, "", "#" + pageId);
+      }
+    }
+
+    /* 필터링 로직 */
+    function applyFilter(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-filter') === category) {
+          btn.classList.add('bg-blue-100', 'text-[#17367a]');
+          btn.classList.remove('text-slate-500', 'hover:text-[#17367a]');
+        } else {
+          btn.classList.remove('bg-blue-100', 'text-[#17367a]');
+          btn.classList.add('text-slate-500', 'hover:text-[#17367a]');
+        }
+      });
+
+      const items = document.querySelectorAll('.portfolio-item');
+      let visibleCount = 0;
+      
+      items.forEach(item => {
+        if (category === 'all' || item.getAttribute('data-category') === category) {
+          item.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      const countEl = document.getElementById('work-count');
+      if(countEl) {
+        countEl.innerText = visibleCount + ' works';
+      }
+    }
+
+    /* 유튜브 모달 제어 */
+    const modal = document.getElementById('youtube-modal');
+    const iframe = document.getElementById('youtube-iframe');
+
+    function openModal(videoId) {
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+      }, 10);
+    }
+
+    function closeModal() {
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        iframe.src = ''; 
+      }, 300);
+    }
+
+    modal.addEventListener('click', function(e) {
+      if(e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // 💡 핵심 추가: 스마트폰/브라우저 '뒤로가기' 버튼 감지 로직
+    window.addEventListener('popstate', function(event) {
+      if (event.state && event.state.pageId) {
+        // 뒤로가기를 눌렀을 때 저장된 기록을 불러와서 해당 화면을 띄움
+        navigateTo(event.state.pageId, event.state.filterCategory, true);
+      } else {
+        navigateTo('home', null, true);
+      }
+    });
+
+    lucide.createIcons();
+    
+    // 💡 핵심 추가: 새로고침하거나 링크로 바로 접속했을 때 화면 유지
+    window.onload = function() { 
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'about' || hash === 'portfolio' || hash === 'contact') {
+        navigateTo(hash, null, true);
+        history.replaceState({ pageId: hash, filterCategory: null }, "", "#" + hash);
+      } else {
+        navigateTo('home', null, true);
+        history.replaceState({ pageId: 'home', filterCategory: null }, "", "#home");
+      }
+    }
+  </script>
