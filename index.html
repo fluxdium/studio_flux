@@ -149,7 +149,7 @@
       
       <nav class="flex items-center justify-center gap-5 md:gap-10 text-[13px] sm:text-[15px] font-medium text-slate-600 overflow-x-auto scrollbar-hide whitespace-nowrap px-2 pt-2">
         <a href="javascript:void(0)" onclick="navigateTo('about')" id="nav-about" class="nav-link">About</a>
-        <a href="javascript:void(0)" onclick="navigateTo('portfolio', 'all')" id="nav-portfolio" class="nav-link">Work</a>
+        <a href="javascript:void(0)" onclick="navigateTo('work', 'all')" id="nav-work" class="nav-link">Work</a>
         <a href="javascript:void(0)" onclick="navigateTo('contact')" id="nav-contact" class="nav-link">Contact</a>
       </nav>
 
@@ -179,7 +179,7 @@
             플럭스는 직관적인 3D 시각화 솔루션을 제공합니다.
           </p>
           <div class="mt-8 flex items-center justify-center gap-4">
-            <button onclick="navigateTo('portfolio', 'all')" class="btn-flux bg-white/70 backdrop-blur-md">
+            <button onclick="navigateTo('work', 'all')" class="btn-flux bg-white/70 backdrop-blur-md">
               <i data-lucide="layout-grid" class="w-4 h-4"></i> View Work
             </button>
             <button onclick="navigateTo('contact')" class="btn-flux bg-white/70 backdrop-blur-md">
@@ -193,7 +193,7 @@
         <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             
-            <a href="javascript:void(0)" onclick="navigateTo('portfolio', 'medical')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
+            <a href="javascript:void(0)" onclick="navigateTo('work', 'medical')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
               <img src="./src/flux_main_01.jpg" alt="메디컬 영상 제작" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
               <div class="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent"></div>
               <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
@@ -204,7 +204,7 @@
               </div>
             </a>
             
-            <a href="javascript:void(0)" onclick="navigateTo('portfolio', 'device')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
+            <a href="javascript:void(0)" onclick="navigateTo('work', 'device')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
               <img src="./src/flux_main_02.jpg" alt="의료기기 홍보 영상 제작" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
               <div class="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent"></div>
               <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
@@ -215,7 +215,7 @@
               </div>
             </a>
             
-            <a href="javascript:void(0)" onclick="navigateTo('portfolio', 'mechanism')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
+            <a href="javascript:void(0)" onclick="navigateTo('work', 'mechanism')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
               <img src="./src/flux_main_03.jpg" alt="논문 기전 3D 시각화" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
               <div class="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent"></div>
               <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
@@ -226,7 +226,7 @@
               </div>
             </a>
             
-            <a href="javascript:void(0)" onclick="navigateTo('portfolio', 'commercial')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
+            <a href="javascript:void(0)" onclick="navigateTo('work', 'commercial')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
               <img src="./src/flux_main_04.jpg" alt="3D 커머셜 브랜드 필름" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
               <div class="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent"></div>
               <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
@@ -270,7 +270,7 @@
             <div class="grid lg:grid-cols-12 gap-10 items-center">
               <div class="lg:col-span-6">
                 <div class="relative rounded-xl overflow-hidden border border-slate-100 shadow-md">
-                  <img src="./src/flux_main_06.jpg" alt="제이시스메디컬 고주파 멜라닌 억제 기전" class="w-full h-80 object-cover">
+                  <img src="./src/flux_main_06.jpg" alt="제이시스메디칼 고주파 멜라닌 억제 기전" class="w-full h-80 object-cover">
                 </div>
               </div>
               <div class="lg:col-span-6 lg:pl-4">
@@ -278,11 +278,11 @@
                   <span class="w-1.5 h-1.5 rounded-full bg-[#17367a]"></span>
                   <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold">Featured Project</p>
                 </div>
-                <h3 class="text-3xl font-black text-slate-900 mb-4 tracking-tight leading-snug">제이시스메디컬 <br>고주파 멜라닌 억제 기전</h3>
+                <h3 class="text-3xl font-black text-slate-900 mb-4 tracking-tight leading-snug">제이시스메디칼 <br>고주파 멜라닌 억제 기전</h3>
                 <p class="text-slate-600 text-sm font-medium mb-8 leading-relaxed">
                   고주파 시술이 멜라닌 합성을 억제하고 자가포식을 유도하며, 림프관 신생을 통해 과침착된 색소를 제거하는 복잡한 기전을 시각화했습니다.
                 </p>
-                <button onclick="navigateTo('portfolio', 'all')" class="btn-solid">
+                <button onclick="navigateTo('work', 'all')" class="btn-solid">
                   <span class="btn-solid-inner"><i data-lucide="compass" class="w-4 h-4"></i> Explore Project</span>
                 </button>
               </div>
@@ -352,7 +352,7 @@
           </div>
           <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 text-center">
             
-            <div onclick="navigateTo('portfolio', 'medical')" class="group flex flex-col items-center cursor-pointer">
+            <div onclick="navigateTo('work', 'medical')" class="group flex flex-col items-center cursor-pointer">
               <div class="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200 shadow-md flex items-center justify-center mb-6 transition duration-300 group-hover:border-[#17367a]">
                 <i data-lucide="microscope" class="w-7 h-7 text-slate-800 transition duration-300 group-hover:text-[#17367a] group-hover:scale-110"></i>
               </div>
@@ -360,7 +360,7 @@
               <p class="text-sm text-slate-500 leading-relaxed break-keep">해부학적 지식을 바탕으로 인체 내부와 복잡한 수술 과정을 정밀하게 시각화합니다.</p>
             </div>
             
-            <div onclick="navigateTo('portfolio', 'device')" class="group flex flex-col items-center cursor-pointer">
+            <div onclick="navigateTo('work', 'device')" class="group flex flex-col items-center cursor-pointer">
               <div class="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200 shadow-md flex items-center justify-center mb-6 transition duration-300 group-hover:border-[#17367a]">
                 <i data-lucide="monitor-play" class="w-7 h-7 text-slate-800 transition duration-300 group-hover:text-[#17367a] group-hover:scale-110"></i>
               </div>
@@ -368,7 +368,7 @@
               <p class="text-sm text-slate-500 leading-relaxed break-keep">의료기기 및 제품의 기술력을 라이팅과 렌더링을 통해 브랜드 필름으로 완성합니다.</p>
             </div>
             
-            <div onclick="navigateTo('portfolio', 'mechanism')" class="group flex flex-col items-center cursor-pointer">
+            <div onclick="navigateTo('work', 'mechanism')" class="group flex flex-col items-center cursor-pointer">
               <div class="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200 shadow-md flex items-center justify-center mb-6 transition duration-300 group-hover:border-[#17367a]">
                 <i data-lucide="dna" class="w-7 h-7 text-slate-800 transition duration-300 group-hover:text-[#17367a] group-hover:scale-110"></i>
               </div>
@@ -376,7 +376,7 @@
               <p class="text-sm text-slate-500 leading-relaxed break-keep">기초과학 논문의 난해한 데이터와 특수 기전을 분석하여 3D 메커니즘으로 구현합니다.</p>
             </div>
 
-            <div onclick="navigateTo('portfolio', 'commercial')" class="group flex flex-col items-center cursor-pointer">
+            <div onclick="navigateTo('work', 'commercial')" class="group flex flex-col items-center cursor-pointer">
               <div class="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200 shadow-md flex items-center justify-center mb-6 transition duration-300 group-hover:border-[#17367a]">
                 <i data-lucide="clapperboard" class="w-7 h-7 text-slate-800 transition duration-300 group-hover:text-[#17367a] group-hover:scale-110"></i>
               </div>
@@ -445,7 +445,7 @@
       </div>
     </div>
 
-    <div id="page-portfolio" class="page-view py-12 px-6 max-w-6xl mx-auto">
+    <div id="page-work" class="page-view py-12 px-6 max-w-6xl mx-auto">
       
       <div class="mb-6 flex items-center text-sm font-bold text-slate-400">
         <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-[#17367a] transition">Home</a>
@@ -455,6 +455,9 @@
 
       <div class="mb-8">
         <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">프로젝트</h2>
+        <p class="mt-4 text-slate-500 text-[15px] font-medium leading-relaxed max-w-3xl">
+          웹사이트에 공개된 작업물 외에, 다양한 인더스트리에 맞춘 다수의 비공개 레퍼런스가 준비되어 있습니다. 더 많은 레퍼런스가 궁금하시다면 언제든 편하게 문의해 주세요.
+        </p>
       </div>
 
       <div class="flex flex-col md:flex-row items-center justify-between border-b border-slate-200 pb-4 mb-8 text-sm font-bold">
@@ -472,7 +475,7 @@
         </div>
       </div>
 
-      <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         <a data-category="mechanism" href="javascript:void(0)" onclick="openModal('5gJfvawTQjY')" class="portfolio-item group relative overflow-hidden rounded-xl border border-slate-200 hover:border-[#17367a] transition block shadow-sm bg-white cursor-pointer">
           <div class="relative w-full aspect-video overflow-hidden bg-slate-100">
@@ -625,7 +628,7 @@
               </div>
               <div>
                 <p class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Email</p>
-                <a href="mailto:fluxdium@gmail.com" class="text-lg font-medium text-slate-900 hover:text-[#17367a] transition">fluxdium@gmail.com</a>
+                <a href="mailto:contact@studioflux.co.kr" class="text-lg font-medium text-slate-900 hover:text-[#17367a] transition">contact@studioflux.co.kr</a>
               </div>
             </div>
             
@@ -642,10 +645,8 @@
         </div>
 
         <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
-          <form action="https://formsubmit.co/fluxdium@gmail.com" method="POST" class="space-y-5">
+          <form id="contact-form" action="https://formsubmit.co/contact@studioflux.co.kr" method="POST" class="space-y-5">
             <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://studioflux.co.kr/">
-            
             <div>
               <label class="block text-sm font-bold text-slate-700 mb-1.5">회사명 / 담당자명 *</label>
               <input type="text" name="name" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#17367a] focus:ring-1 focus:ring-[#17367a] transition">
@@ -658,8 +659,8 @@
               <label class="block text-sm font-bold text-slate-700 mb-1.5">프로젝트 내용 및 예산</label>
               <textarea name="message" rows="4" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#17367a] focus:ring-1 focus:ring-[#17367a] transition" placeholder="준비 중인 기획안이나 레퍼런스 링크가 있다면 함께 남겨주세요."></textarea>
             </div>
-            <button type="submit" class="w-full btn-solid !py-3 !text-base mt-2">
-              <span class="btn-solid-inner">문의 보내기 <i data-lucide="send" class="w-4 h-4 ml-1"></i></span>
+            <button type="submit" id="submit-btn" class="w-full btn-solid !py-3 !text-base mt-2 disabled:opacity-50 disabled:cursor-not-allowed">
+              <span id="submit-text" class="btn-solid-inner">문의 보내기 <i data-lucide="send" class="w-4 h-4 ml-1"></i></span>
             </button>
           </form>
         </div>
@@ -678,7 +679,7 @@
           </a>
           <nav class="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 text-[12px] md:text-[13px] font-medium text-blue-100">
             <a href="javascript:void(0)" onclick="navigateTo('about')" class="hover:text-white hover:underline transition">About</a>
-            <a href="javascript:void(0)" onclick="navigateTo('portfolio', 'all')" class="hover:text-white hover:underline transition">Work</a>
+            <a href="javascript:void(0)" onclick="navigateTo('work', 'all')" class="hover:text-white hover:underline transition">Work</a>
             <a href="javascript:void(0)" onclick="navigateTo('contact')" class="hover:text-white hover:underline transition">Contact</a>
           </nav>
         </div>
@@ -719,7 +720,7 @@
       const targetNav = document.getElementById('nav-' + pageId);
       if(targetNav) targetNav.classList.add('active');
 
-      if (pageId === 'portfolio') {
+      if (pageId === 'work') {
         if (filterCategory) {
           applyFilter(filterCategory);
         } else {
@@ -727,7 +728,6 @@
         }
       }
 
-      // 💡 히스토리 기록 (뒤로가기 방지용 로직)
       if (!isBackAction) {
         history.pushState({ pageId: pageId, filterCategory: filterCategory }, "", "#" + pageId);
       }
@@ -792,7 +792,46 @@
       }
     });
 
-    // 💡 스마트폰/브라우저 '뒤로가기' 버튼 감지 이벤트
+    // 💡 폼(Form) 부드러운 전송 처리 (AJAX) - 회사 공식 이메일로 변경 완료
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const btn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('submit-text');
+
+        btn.disabled = true;
+        btnText.innerHTML = '메일 전송 중...';
+
+        const formData = new FormData(contactForm);
+
+        // 💡 FETCH 주소도 공식 이메일로 완벽하게 변경
+        fetch("https://formsubmit.co/ajax/contact@studioflux.co.kr", {
+          method: "POST",
+          headers: {
+              'Accept': 'application/json'
+          },
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          alert("감사합니다! 문의가 성공적으로 접수되었습니다.\n내용을 꼼꼼히 검토 후 빠르게 회신해 드리겠습니다.");
+          contactForm.reset(); 
+          
+          btn.disabled = false; 
+          btnText.innerHTML = '문의 보내기 <i data-lucide="send" class="w-4 h-4 ml-1"></i>';
+          lucide.createIcons();
+        })
+        .catch(error => {
+          alert("죄송합니다. 메일 전송 중 오류가 발생했습니다.\n잠시 후 다시 시도해 주세요.");
+          btn.disabled = false;
+          btnText.innerHTML = '문의 보내기 <i data-lucide="send" class="w-4 h-4 ml-1"></i>';
+          lucide.createIcons();
+        });
+      });
+    }
+
     window.addEventListener('popstate', function(event) {
       if (event.state && event.state.pageId) {
         navigateTo(event.state.pageId, event.state.filterCategory, true);
@@ -803,10 +842,9 @@
 
     lucide.createIcons();
     
-    // 💡 첫 사이트 로드 시, 링크 주소창 끝의 해시태그를 읽어서 알맞은 화면을 띄워줌
     window.onload = function() { 
       let hash = window.location.hash.replace('#', '');
-      const validPages = ['home', 'about', 'portfolio', 'contact'];
+      const validPages = ['home', 'about', 'work', 'contact'];
       
       if (!validPages.includes(hash)) {
         hash = 'home';
