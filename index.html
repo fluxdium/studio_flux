@@ -172,6 +172,10 @@
     line-height: 1.22;
   }
 
+  .section-title {
+    line-height: 1.45 !important;
+  }
+
   @media (max-width: 767px) {
     .hero-section {
       min-height: 440px;
@@ -294,12 +298,12 @@
     <div id="page-home" class="page-view active">
       <section class="hero-section relative w-full flex items-center overflow-hidden bg-[#eef2f6] border-b border-slate-200/60">
         <div class="absolute inset-0 pointer-events-none bg-grid-line z-0"></div>
-        <video id="hero-video" class="absolute inset-0 w-full h-full object-cover opacity-[0.65] blur-[1px]" poster="./src/flux_web_01.jpg" autoplay loop muted playsinline preload="none" aria-hidden="true">
-          <source data-src="./src/flux_video_1.mp4" type="video/mp4">
+        <video id="hero-video" class="absolute inset-0 w-full h-full object-cover opacity-[0.65] blur-[1px]" poster="./src/flux_web_01.jpg" autoplay loop muted playsinline preload="metadata" aria-hidden="true">
+          <source src="./src/flux_video_1.mp4" type="video/mp4">
         </video>
         <div class="text-glow-overlay"></div>
         <div class="max-w-6xl mx-auto px-6 w-full relative z-20 text-center flex flex-col items-center">
-          <p class="text-[11px] md:text-[13px] font-black tracking-[0.30em] pl-[0.22em] text-slate-800 uppercase mb-6">MEDICAL • COMMERCIAL • 3D STUDIO</p>
+          <p class="text-[11px] md:text-[13px] font-black tracking-[0.30em] pl-[0.22em] text-slate-800 uppercase mb-6">MEDICAL VISUALIZATION STUDIO</p>
           <h1 class="hero-title font-black text-slate-900 tracking-tight mb-5">
             정교한 메디컬 메커니즘부터<br>
             감각적인 커머셜 필름까지<br>
@@ -374,7 +378,7 @@
         <div class="max-w-6xl mx-auto px-6">
           <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div class="lg:col-span-6">
-              <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5 leading-snug">
+              <h2 class="section-title text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5">
                 복잡함을 명쾌함으로 바꾸는<br>최적화된 프로세스
               </h2>
               <p class="text-slate-600 text-[15px] font-medium leading-relaxed mb-8">
@@ -423,7 +427,7 @@
       <section class="py-12 text-center px-6 mb-8">
         <div class="max-w-3xl mx-auto">
           <p class="text-[10px] font-black tracking-[0.3em] text-[#17367a] uppercase mb-4">Let's work together</p>
-          <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5 leading-snug">
+              <h2 class="section-title text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5">
             플럭스와 함께 <br>완성도 높은 프로젝트를 시작하세요.
           </h2>
           <p class="text-slate-500 text-[15px] font-medium mb-8">
@@ -448,7 +452,7 @@
         <div class="grid lg:grid-cols-2 gap-12 items-center mb-8">
           <div class="pr-0 lg:pr-8">
             <p class="text-[11px] font-black tracking-[0.2em] text-[#17367a] uppercase mb-3">About FLUX</p>
-            <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-snug mb-6">데이터의 정확성에<br>시각적 깊이를 더합니다.</h2>
+          <h2 class="section-title text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-6">데이터의 정확성에<br>시각적 깊이를 더합니다.</h2>
             <p class="text-slate-600 text-[16px] leading-relaxed mb-6">
               플럭스(FLUX)는 폭넓은 프로젝트 경험과 확실한 실무 능력을 갖춘 3D 영상 디자이너가 이끄는 메디컬·커머셜 시각화 전문 스튜디오입니다.
             </p>
@@ -1060,16 +1064,6 @@
       navigateTo(hash, null, true);
       history.replaceState({ pageId: hash, filterCategory: null }, "", "#" + hash);
 
-      const heroVideo = document.getElementById('hero-video');
-      const canLoadVideo = window.matchMedia('(min-width: 768px)').matches && !navigator.connection?.saveData;
-      if (heroVideo && canLoadVideo) {
-        const source = heroVideo.querySelector('source[data-src]');
-        if (source) {
-          source.src = source.dataset.src;
-          heroVideo.load();
-          heroVideo.play().catch(() => {});
-        }
-      }
     }
   </script>
 </body>
