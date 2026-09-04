@@ -36,14 +36,19 @@
 <meta property="og:title" content="FLUX 메디컬 3D 영상 및 커머셜 시각화 전문 스튜디오" />
 <meta property="og:description" content="19+년 디렉터 경험을 바탕으로 의학 애니메이션부터 의료기기 홍보까지 제작하는 메디컬 시각화 스튜디오 FLUX." />
 <meta property="og:url" content="https://studioflux.co.kr/" />
-<meta property="og:image" content="https://studioflux.co.kr/src/flux_web_01.jpg" />
+<meta property="og:image" content="https://studioflux.co.kr/src/flux_web_02.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="FLUX 메디컬 3D 시각화 스튜디오" />
 <meta property="og:locale" content="ko_KR" />
 
 <!-- ===== Twitter(X) 카드 ===== -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="FLUX 메디컬 3D 영상 및 커머셜 시각화 전문 스튜디오" />
 <meta name="twitter:description" content="19+년 디렉터 경험을 바탕으로 의학 애니메이션부터 의료기기 홍보까지 제작하는 메디컬 시각화 스튜디오 FLUX." />
-<meta name="twitter:image" content="https://studioflux.co.kr/src/flux_web_01.jpg" />
+<meta name="twitter:image" content="https://studioflux.co.kr/src/flux_web_02.png" />
+<meta name="twitter:image:alt" content="FLUX 메디컬 3D 시각화 스튜디오" />
 
 <!-- ===== 파비콘(브라우저 탭 아이콘) ===== -->
 <link rel="icon" type="image/png" href="./src/flux_favicon.png" />
@@ -165,6 +170,21 @@
     min-height: 480px;
     height: auto;
     padding-block: 4rem;
+  }
+
+  #hero-video {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  #hero-video.is-ready {
+    opacity: 0.65;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #hero-video {
+      transition: none;
+    }
   }
 
   .hero-title {
@@ -303,7 +323,7 @@
     <div id="page-home" class="page-view active">
       <section class="hero-section relative w-full flex items-center overflow-hidden bg-[#eef2f6] border-b border-slate-200/60">
         <div class="absolute inset-0 pointer-events-none bg-grid-line z-0"></div>
-        <video id="hero-video" class="absolute inset-0 w-full h-full object-cover opacity-[0.65] blur-[1px]" poster="./src/flux_web_01.jpg" autoplay loop muted playsinline preload="metadata" aria-hidden="true">
+        <video id="hero-video" class="absolute inset-0 w-full h-full object-cover blur-[1px]" autoplay loop muted playsinline preload="metadata" aria-hidden="true">
           <source media="(max-width: 767px)" src="./src/flux_video_1_mobile.mp4" type="video/mp4">
           <source src="./src/flux_video_1.mp4" type="video/mp4">
         </video>
@@ -1089,12 +1109,16 @@
 
       const heroVideo = document.getElementById('hero-video');
       if (heroVideo) {
+        const revealHeroVideo = () => {
+          requestAnimationFrame(() => heroVideo.classList.add('is-ready'));
+        };
+
+        heroVideo.addEventListener('playing', revealHeroVideo, { once: true });
         heroVideo.muted = true;
-        heroVideo.play().catch(() => {});
+        heroVideo.play().then(revealHeroVideo).catch(() => {});
       }
 
     }
   </script>
 </body>
 </html>
-
