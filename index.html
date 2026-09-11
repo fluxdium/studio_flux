@@ -167,9 +167,9 @@
   }
 
   .hero-section {
-    min-height: 480px;
-    height: auto;
-    padding-block: 4rem;
+    min-height: 560px;
+    height: clamp(560px, 66vh, 640px);
+    padding-block: 5rem;
   }
 
   #hero-video {
@@ -203,8 +203,9 @@
 
   @media (max-width: 767px) {
     .hero-section {
-      min-height: 440px;
-      padding-block: 3rem;
+      min-height: 460px;
+      height: auto;
+      padding-block: 3.5rem;
     }
 
     .hero-title {
@@ -379,7 +380,7 @@
             </a>
             
             <a href="javascript:void(0)" onclick="navigateTo('work', 'mechanism')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
-              <img src="./src/flux_main_03.jpg" alt="논문 기전 3D 시각화" loading="lazy" decoding="async" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
+              <img src="./src/flux_main_03_v2.jpg" alt="신경 시냅스 기반 논문 기전 3D 시각화" loading="lazy" decoding="async" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
               <div class="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent"></div>
               <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                 <div>
@@ -420,7 +421,7 @@
             </div>
             <div class="lg:col-span-6">
               <div class="rounded-xl border border-slate-200 overflow-hidden shadow-sm bg-white p-2">
-                <img src="./src/flux_main_05.jpg" alt="플럭스 스튜디오 3D 시각화 프로세스" loading="lazy" decoding="async" class="w-full h-[360px] object-cover rounded-lg">
+                <img src="./src/flux_main_05_v2.jpg" alt="인체 구조를 단계적으로 구현하는 플럭스 3D 시각화 프로세스" loading="lazy" decoding="async" class="w-full aspect-video object-cover rounded-lg">
               </div>
             </div>
           </div>
@@ -429,27 +430,63 @@
 
       <section class="py-10 px-6">
         <div class="max-w-6xl mx-auto">
-          <div class="relative rounded-2xl border border-slate-200 bg-white p-8 md:p-12 shadow-sm">
-            <div class="grid lg:grid-cols-12 gap-10 items-center">
-              <div class="lg:col-span-6">
-                <div class="relative rounded-xl overflow-hidden border border-slate-100 shadow-md">
-                  <img src="./src/flux_main_06.jpg" alt="제이시스메디칼 고주파 멜라닌 억제 기전" loading="lazy" decoding="async" class="w-full h-80 object-cover">
-                </div>
-              </div>
-              <div class="lg:col-span-6 lg:pl-4">
-                <div class="flex items-center gap-2 mb-3">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#17367a]"></span>
-                  <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold">Featured Project</p>
-                </div>
-                <h3 class="text-3xl font-black text-slate-900 mb-4 tracking-tight leading-snug">제이시스메디칼 <br>고주파 멜라닌 억제 기전</h3>
-                <p class="text-slate-600 text-sm font-medium mb-8 leading-relaxed">
-                  고주파 시술이 멜라닌 합성을 억제하고 자가포식을 유도하며, 림프관 신생을 통해 과침착된 색소를 제거하는 복잡한 기전을 시각화했습니다.
-                </p>
-                <button onclick="navigateTo('work', 'all')" class="btn-solid">
-                  <span class="btn-solid-inner"><i data-lucide="compass" class="w-4 h-4"></i> Explore Project</span>
-                </button>
-              </div>
+          <div class="flex items-end justify-between gap-6 mb-6">
+            <div>
+              <p class="text-[10px] font-black tracking-[0.24em] text-[#17367a] uppercase mb-2">Featured Projects</p>
+              <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">주요 프로젝트</h2>
             </div>
+            <div class="hidden sm:block">
+              <button onclick="navigateTo('work', 'all')" class="btn-flux">
+                <i data-lucide="layout-grid" class="w-4 h-4"></i> View All
+              </button>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-5 md:gap-6">
+            <a href="https://www.youtube.com/watch?v=RxNmCo08GjQ" onclick="openModal('RxNmCo08GjQ', '제이시스메디칼 덴서티 알파팁'); return false;" class="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
+              <div class="relative aspect-video overflow-hidden bg-slate-100">
+                <img src="./src/flux_work_02.jpg" alt="제이시스메디칼 덴서티 알파팁 의료기기 홍보 영상" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                  <i data-lucide="play-circle" class="w-11 h-11 text-white opacity-90 drop-shadow-md"></i>
+                </div>
+              </div>
+              <div class="p-5">
+                <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">Device</p>
+                <h3 class="text-lg font-bold text-slate-900 tracking-tight leading-snug">제이시스메디칼 덴서티 알파팁</h3>
+              </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=5gJfvawTQjY" onclick="openModal('5gJfvawTQjY', '제이시스메디칼 고주파 멜라닌 억제 기전'); return false;" class="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
+              <div class="relative aspect-video overflow-hidden bg-slate-100">
+                <img src="./src/flux_work_01.jpg" alt="제이시스메디칼 고주파 멜라닌 억제 기전 시각화" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                  <i data-lucide="play-circle" class="w-11 h-11 text-white opacity-90 drop-shadow-md"></i>
+                </div>
+              </div>
+              <div class="p-5">
+                <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">Mechanism</p>
+                <h3 class="text-lg font-bold text-slate-900 tracking-tight leading-snug">제이시스메디칼 고주파 멜라닌 억제 기전</h3>
+              </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=z2G8yPKpNyI" onclick="openModal('z2G8yPKpNyI', '자생한방병원 안면신경마비 치료 기전'); return false;" class="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
+              <div class="relative aspect-video overflow-hidden bg-slate-100">
+                <img src="./src/flux_work_03.jpg" alt="자생한방병원 안면신경마비 치료 3D 애니메이션" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                  <i data-lucide="play-circle" class="w-11 h-11 text-white opacity-90 drop-shadow-md"></i>
+                </div>
+              </div>
+              <div class="p-5">
+                <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">Medical</p>
+                <h3 class="text-lg font-bold text-slate-900 tracking-tight leading-snug">자생한방병원 안면신경마비 치료 기전</h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="sm:hidden text-center mt-6">
+            <button onclick="navigateTo('work', 'all')" class="btn-flux">
+              <i data-lucide="layout-grid" class="w-4 h-4"></i> View All
+            </button>
           </div>
         </div>
       </section>
@@ -491,7 +528,7 @@
             </p>
           </div>
           <div class="relative mt-8 lg:mt-0">
-          <img src="./src/flux_about_01.jpg" alt="플럭스 3D 스튜디오" loading="lazy" decoding="async" class="rounded-xl shadow-lg w-full h-[400px] object-cover border border-slate-200">
+          <img src="./src/flux_about_02.jpg" alt="동맥경화로 좁아진 혈관 내부를 표현한 FLUX 메디컬 3D 시각화" loading="lazy" decoding="async" class="rounded-xl shadow-lg w-full aspect-video object-cover object-center border border-slate-200">
             <div class="absolute -bottom-6 -right-4 md:-right-8 bg-white p-5 rounded-2xl shadow-xl border border-slate-100 flex gap-6 items-center">
               <div class="text-center">
                 <p class="text-3xl font-black text-[#17367a] mb-1">19<span class="text-xl">+</span></p>
@@ -638,7 +675,7 @@
         </div>
       </div>
 
-      <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
         
         <a data-category="mechanism" href="javascript:void(0)" onclick="openModal('5gJfvawTQjY')" class="portfolio-item group relative overflow-hidden rounded-xl border border-slate-200 hover:border-[#17367a] transition block shadow-sm bg-white cursor-pointer">
           <div class="relative w-full aspect-video overflow-hidden bg-slate-100">
