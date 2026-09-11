@@ -126,6 +126,7 @@
 <style>
   :root {
     --flux-navy: #17367a;
+    --flux-lime: #A8CA24;
   }
 
   html {
@@ -233,6 +234,14 @@
     border-color: var(--flux-navy);
     color: #ffffff;
   }
+  .hero-actions .btn-flux:hover {
+    background-color: rgba(23, 54, 122, 0.5);
+  }
+
+  .title-dot {
+    color: var(--flux-lime);
+    font-weight: 900;
+  }
   .btn-flux svg {
     margin-top: -1px; 
   }
@@ -332,17 +341,16 @@
         <div class="max-w-6xl mx-auto px-6 w-full relative z-20 text-center flex flex-col items-center">
           <p class="hero-eyebrow inline-flex items-center whitespace-nowrap text-[11px] md:text-[13px] font-black pl-[0.14em] text-slate-800 uppercase mb-6" aria-label="Medical Visualization Studio">
             <span>MEDICAL VISUALIZATION</span>
-            <span class="mx-[0.55em] text-[#A8CA24]" aria-hidden="true">•</span>
-            <span>STUDIO</span>
+            <span class="ml-[0.55em]">STUDIO</span>
           </p>
           <h1 class="hero-title font-black text-slate-900 tracking-tight mb-5">
             정교한 메디컬 메커니즘부터<br>
-            감각적인 커머셜 필름까지<br>
+            감각적인 커머셜 필름까지<span class="title-dot">.</span>
           </h1>
           <p class="text-[14px] md:text-[18px] text-slate-900 font-bold max-w-2xl mx-auto leading-relaxed">
             플럭스는 직관적인 3D 시각화 솔루션을 제공합니다.
           </p>
-          <div class="mt-8 flex items-center justify-center gap-4">
+          <div class="hero-actions mt-8 flex items-center justify-center gap-4">
             <button onclick="navigateTo('work', 'all')" class="btn-flux bg-white/70 backdrop-blur-md">
               <i data-lucide="layout-grid" class="w-4 h-4"></i> View Work
             </button>
@@ -358,7 +366,7 @@
           <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             
             <a href="javascript:void(0)" onclick="navigateTo('work', 'medical')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
-              <img src="./src/flux_main_01.jpg" alt="메디컬 영상 제작" loading="lazy" decoding="async" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
+              <img src="./src/flux_main_medical.jpg" alt="동맥경화로 좁아진 혈관 내부를 표현한 메디컬 3D 시각화" loading="lazy" decoding="async" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
               <div class="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent"></div>
               <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                 <div>
@@ -380,7 +388,7 @@
             </a>
             
             <a href="javascript:void(0)" onclick="navigateTo('work', 'mechanism')" class="group relative overflow-hidden rounded-lg border border-slate-200 hover:border-[#17367a] transition block shadow-sm cursor-pointer">
-              <img src="./src/flux_main_03_v2.jpg" alt="신경 시냅스 기반 논문 기전 3D 시각화" loading="lazy" decoding="async" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
+              <img src="./src/flux_main_mechanism.jpg" alt="신경세포를 표현한 논문 기전 3D 시각화" loading="lazy" decoding="async" class="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.03]">
               <div class="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent"></div>
               <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                 <div>
@@ -410,7 +418,7 @@
           <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div class="lg:col-span-6">
               <h2 class="section-title text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5">
-                복잡함을 명쾌함으로 바꾸는<br>최적화된 프로세스
+                복잡함을 명쾌함으로 바꾸는<br>최적화된 프로세스<span class="title-dot">.</span>
               </h2>
               <p class="text-slate-600 text-[15px] font-medium leading-relaxed mb-8">
                 엄격한 메디컬 그래픽과 기초과학 논문 시각화 등 고도의 전문성이 요구되는 특수 영역에서도, 다년간 쌓아온 제작 노하우를 통해 작업 리스크를 최소화하고 클라이언트가 요구하는 정확한 결과물을 완성합니다.
@@ -421,7 +429,7 @@
             </div>
             <div class="lg:col-span-6">
               <div class="rounded-xl border border-slate-200 overflow-hidden shadow-sm bg-white p-2">
-                <img src="./src/flux_main_05_v2.jpg" alt="인체 구조를 단계적으로 구현하는 플럭스 3D 시각화 프로세스" loading="lazy" decoding="async" class="w-full aspect-video object-cover rounded-lg">
+                <img src="./src/flux_main_process.jpg" alt="신경 전달 구조를 정밀하게 구현한 플럭스 3D 시각화" loading="lazy" decoding="async" class="w-full aspect-video object-cover rounded-lg">
               </div>
             </div>
           </div>
@@ -433,7 +441,7 @@
           <div class="flex items-end justify-between gap-6 mb-6">
             <div>
               <p class="text-[10px] font-black tracking-[0.24em] text-[#17367a] uppercase mb-2">Featured Projects</p>
-              <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">주요 프로젝트</h2>
+              <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">주요 프로젝트<span class="title-dot">.</span></h2>
             </div>
             <div class="hidden sm:block">
               <button onclick="navigateTo('work', 'all')" class="btn-flux">
@@ -442,43 +450,49 @@
             </div>
           </div>
 
-          <div class="grid md:grid-cols-3 gap-5 md:gap-6">
-            <a href="https://www.youtube.com/watch?v=RxNmCo08GjQ" onclick="openModal('RxNmCo08GjQ', '제이시스메디칼 덴서티 알파팁'); return false;" class="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
-              <div class="relative aspect-video overflow-hidden bg-slate-100">
+          <div class="space-y-6 md:space-y-8">
+            <a href="https://www.youtube.com/watch?v=RxNmCo08GjQ" onclick="openModal('RxNmCo08GjQ', '제이시스메디칼 덴서티 알파팁'); return false;" class="group grid md:grid-cols-12 items-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
+              <div class="relative md:col-span-6 aspect-video overflow-hidden bg-slate-100">
                 <img src="./src/flux_work_02.jpg" alt="제이시스메디칼 덴서티 알파팁 의료기기 홍보 영상" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
                 <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-                  <i data-lucide="play-circle" class="w-11 h-11 text-white opacity-90 drop-shadow-md"></i>
+                  <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
                 </div>
               </div>
-              <div class="p-5">
-                <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">Device</p>
-                <h3 class="text-lg font-bold text-slate-900 tracking-tight leading-snug">제이시스메디칼 덴서티 알파팁</h3>
+              <div class="md:col-span-6 p-6 md:p-10">
+                <p class="text-[10px] font-black tracking-[0.18em] text-[#17367a] uppercase mb-3">Featured Project · Device</p>
+                <h3 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-snug mb-4">제이시스메디칼<br>덴서티 알파팁</h3>
+                <p class="text-sm md:text-[15px] text-slate-500 leading-relaxed mb-6">기기 외관 뷰티샷과 피부 단면을 투과하는 알파팁의 작동 원리를 정교한 3D 영상으로 구현했습니다.</p>
+                <span class="btn-solid"><span class="btn-solid-inner"><i data-lucide="play" class="w-4 h-4"></i> Explore Project</span></span>
               </div>
             </a>
 
-            <a href="https://www.youtube.com/watch?v=5gJfvawTQjY" onclick="openModal('5gJfvawTQjY', '제이시스메디칼 고주파 멜라닌 억제 기전'); return false;" class="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
-              <div class="relative aspect-video overflow-hidden bg-slate-100">
+            <a href="https://www.youtube.com/watch?v=5gJfvawTQjY" onclick="openModal('5gJfvawTQjY', '제이시스메디칼 고주파 멜라닌 억제 기전'); return false;" class="group grid md:grid-cols-12 items-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
+              <div class="relative order-1 md:order-2 md:col-span-6 aspect-video overflow-hidden bg-slate-100">
                 <img src="./src/flux_work_01.jpg" alt="제이시스메디칼 고주파 멜라닌 억제 기전 시각화" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
                 <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-                  <i data-lucide="play-circle" class="w-11 h-11 text-white opacity-90 drop-shadow-md"></i>
+                  <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
                 </div>
               </div>
-              <div class="p-5">
-                <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">Mechanism</p>
-                <h3 class="text-lg font-bold text-slate-900 tracking-tight leading-snug">제이시스메디칼 고주파 멜라닌 억제 기전</h3>
+              <div class="order-2 md:order-1 md:col-span-6 p-6 md:p-10">
+                <p class="text-[10px] font-black tracking-[0.18em] text-[#17367a] uppercase mb-3">Featured Project · Mechanism</p>
+                <h3 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-snug mb-4">제이시스메디칼<br>고주파 멜라닌 억제 기전</h3>
+                <p class="text-sm md:text-[15px] text-slate-500 leading-relaxed mb-6">고주파가 멜라닌 합성을 억제하고 색소를 제거하는 복합적인 기전을 직관적으로 시각화했습니다.</p>
+                <span class="btn-solid"><span class="btn-solid-inner"><i data-lucide="play" class="w-4 h-4"></i> Explore Project</span></span>
               </div>
             </a>
 
-            <a href="https://www.youtube.com/watch?v=z2G8yPKpNyI" onclick="openModal('z2G8yPKpNyI', '자생한방병원 안면신경마비 치료 기전'); return false;" class="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
-              <div class="relative aspect-video overflow-hidden bg-slate-100">
+            <a href="https://www.youtube.com/watch?v=z2G8yPKpNyI" onclick="openModal('z2G8yPKpNyI', '자생한방병원 안면신경마비 치료 기전'); return false;" class="group grid md:grid-cols-12 items-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
+              <div class="relative md:col-span-6 aspect-video overflow-hidden bg-slate-100">
                 <img src="./src/flux_work_03.jpg" alt="자생한방병원 안면신경마비 치료 3D 애니메이션" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
                 <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-                  <i data-lucide="play-circle" class="w-11 h-11 text-white opacity-90 drop-shadow-md"></i>
+                  <i data-lucide="play-circle" class="w-12 h-12 text-white opacity-90 drop-shadow-md"></i>
                 </div>
               </div>
-              <div class="p-5">
-                <p class="text-[10px] font-black text-[#17367a] uppercase mb-1.5">Medical</p>
-                <h3 class="text-lg font-bold text-slate-900 tracking-tight leading-snug">자생한방병원 안면신경마비 치료 기전</h3>
+              <div class="md:col-span-6 p-6 md:p-10">
+                <p class="text-[10px] font-black tracking-[0.18em] text-[#17367a] uppercase mb-3">Featured Project · Medical</p>
+                <h3 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-snug mb-4">자생한방병원<br>안면신경마비 치료 기전</h3>
+                <p class="text-sm md:text-[15px] text-slate-500 leading-relaxed mb-6">추나요법과 침·약침·한약을 통한 안면신경마비의 단계별 치료 및 회복 과정을 설명했습니다.</p>
+                <span class="btn-solid"><span class="btn-solid-inner"><i data-lucide="play" class="w-4 h-4"></i> Explore Project</span></span>
               </div>
             </a>
           </div>
@@ -495,7 +509,7 @@
         <div class="max-w-3xl mx-auto">
           <p class="text-[10px] font-black tracking-[0.3em] text-[#17367a] uppercase mb-4">Let's work together</p>
               <h2 class="section-title text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5">
-            플럭스와 함께 <br>완성도 높은 프로젝트를 시작하세요.
+            플럭스와 함께 <br>완성도 높은 프로젝트를 시작하세요<span class="title-dot">.</span>
           </h2>
           <p class="text-slate-500 text-[15px] font-medium mb-8">
             정확한 컨셉 분석과 트렌디한 연출을 통해 클라이언트의 기획을 최상의 결과물로 구현합니다.
@@ -519,7 +533,7 @@
         <div class="grid lg:grid-cols-2 gap-12 items-center mb-8">
           <div class="pr-0 lg:pr-8">
             <p class="text-[11px] font-black tracking-[0.2em] text-[#17367a] uppercase mb-3">About FLUX</p>
-          <h2 class="section-title text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-6">데이터의 정확성에<br>시각적 깊이를 더합니다.</h2>
+          <h2 class="section-title text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-6">데이터의 정확성에<br>시각적 깊이를 더합니다<span class="title-dot">.</span></h2>
             <p class="text-slate-600 text-[16px] leading-relaxed mb-6">
               플럭스(FLUX)는 폭넓은 프로젝트 경험과 확실한 실무 능력을 갖춘 3D 영상 디자이너가 이끄는 메디컬·커머셜 시각화 전문 스튜디오입니다.
             </p>
@@ -528,7 +542,7 @@
             </p>
           </div>
           <div class="relative mt-8 lg:mt-0">
-          <img src="./src/flux_about_02.jpg" alt="동맥경화로 좁아진 혈관 내부를 표현한 FLUX 메디컬 3D 시각화" loading="lazy" decoding="async" class="rounded-xl shadow-lg w-full aspect-video object-cover object-center border border-slate-200">
+          <img src="./src/flux_about_anatomy.jpg" alt="인체의 외형부터 근육과 골격, 신경 및 내부 장기까지 단계별로 표현한 FLUX 메디컬 3D 시각화" width="1672" height="941" loading="lazy" decoding="async" class="rounded-xl shadow-lg w-full h-auto object-contain bg-white border border-slate-200">
             <div class="absolute -bottom-6 -right-4 md:-right-8 bg-white p-5 rounded-2xl shadow-xl border border-slate-100 flex gap-6 items-center">
               <div class="text-center">
                 <p class="text-3xl font-black text-[#17367a] mb-1">19<span class="text-xl">+</span></p>
@@ -548,7 +562,7 @@
         <div class="max-w-6xl mx-auto px-6">
           <div class="text-center mb-10">
             <p class="text-[11px] font-black tracking-[0.2em] text-[#17367a] uppercase mb-3">Capabilities</p>
-            <h3 class="text-3xl md:text-4xl font-black text-slate-900">전문 분야</h3>
+            <h3 class="text-3xl md:text-4xl font-black text-slate-900">전문 분야<span class="title-dot">.</span></h3>
           </div>
           <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 text-center">
             
@@ -591,7 +605,7 @@
       <div class="max-w-6xl mx-auto px-6 py-12">
         <div class="text-center mb-12">
           <p class="text-[11px] font-black tracking-[0.2em] text-[#17367a] uppercase mb-3">Workflow</p>
-          <h3 class="text-3xl md:text-4xl font-black text-slate-900">제작 프로세스</h3>
+          <h3 class="text-3xl md:text-4xl font-black text-slate-900">제작 프로세스<span class="title-dot">.</span></h3>
         </div>
         
         <div class="max-w-4xl mx-auto relative pl-4 md:pl-0">
@@ -654,7 +668,7 @@
       </div>
 
       <div class="mb-8">
-        <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">프로젝트</h2>
+        <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">프로젝트<span class="title-dot">.</span></h2>
         <p class="mt-4 text-slate-500 text-[15px] font-medium leading-relaxed max-w-3xl">
           웹사이트에 공개된 작업물 외에, 다양한 인더스트리에 맞춘 다수의 비공개 레퍼런스가 준비되어 있습니다. 더 많은 레퍼런스가 궁금하시다면 언제든 편하게 문의해 주세요.
         </p>
@@ -816,7 +830,7 @@
 
       <div class="grid lg:grid-cols-2 gap-16 items-start">
         <div>
-          <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-6">프로젝트 의뢰 및 문의</h2>
+          <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-6">프로젝트 의뢰 및 문의<span class="title-dot">.</span></h2>
           <p class="text-slate-600 text-[15px] leading-relaxed mb-10">
             플럭스와의 협업을 원하신다면 아래 연락처나 폼을 통해 편하게 남겨주세요. 남겨주신 내용을 꼼꼼히 검토 후 빠르게 회신해 드리겠습니다.
           </p>
