@@ -23,7 +23,7 @@ window.FLUX_PROJECTS = [
     category: 'medical',
     videoId: 'z2G8yPKpNyI',
     image: './src/flux_work_03.jpg',
-    alt: '자생한방병원 안면신경마비 치료 3D 애니메이션',
+    alt: '자생한방병원 안면신경마비 치료 메디컬 애니메이션',
     title: '자생한방병원 안면신경마비 치료 기전',
     description: '안면부 추나요법, 침, 약침, 한약 등 안면신경마비의 단계별 치료 및 회복 과정을 설명하는 시각화 영상.'
   },
@@ -39,7 +39,7 @@ window.FLUX_PROJECTS = [
     category: 'commercial',
     videoId: 'E4_KZ7a97Rk',
     image: './src/flux_work_05.jpg',
-    alt: '기아 EV3 3D 커머셜 영상',
+    alt: '기아 EV3 커머셜 영상',
     title: '기아 EV3 2025 World Car Awards',
     description: '기아 EV3, EV5, EV9 3년 연속 월드카어워즈 수상 프로모션 영상.'
   },
@@ -71,7 +71,7 @@ window.FLUX_PROJECTS = [
     category: 'commercial',
     videoId: 'EIdp0ADl10Y',
     image: './src/flux_work_10.jpg',
-    alt: '한겨레 휴먼테크놀로지어워드 3D 타이틀 패키지',
+    alt: '한겨레 휴먼테크놀로지어워드 그래픽 타이틀 패키지',
     title: '한겨레 휴먼테크놀로지어워드 타이틀 패키지',
     description: '시상식 상징 오브제를 활용하여 제작한 어워드 수상 영상.'
   }
