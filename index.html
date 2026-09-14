@@ -313,6 +313,12 @@
     border-color: var(--flux-navy);
     color: #ffffff;
   }
+  .featured-project:hover .btn-flux,
+  .featured-project:focus-visible .btn-flux {
+    background-color: var(--flux-navy);
+    border-color: var(--flux-navy);
+    color: #ffffff;
+  }
   #page-home .btn-flux,
   #page-home .btn-solid {
     font-family: 'Orbitron', 'Pretendard', sans-serif;
@@ -563,7 +569,7 @@
           </div>
 
           <div class="space-y-6 md:space-y-8">
-            <a href="https://www.youtube.com/watch?v=RxNmCo08GjQ" onclick="openModal('RxNmCo08GjQ', '제이시스메디칼 덴서티 알파팁'); return false;" class="group grid md:grid-cols-12 items-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
+            <a href="https://www.youtube.com/watch?v=RxNmCo08GjQ" onclick="openModal('RxNmCo08GjQ', '제이시스메디칼 덴서티 알파팁'); return false;" class="featured-project group grid md:grid-cols-12 items-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
               <div class="relative md:col-span-6 aspect-video overflow-hidden bg-slate-100">
                 <img src="./src/flux_work_02.jpg" alt="제이시스메디칼 덴서티 알파팁 의료기기 홍보 영상" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
                 <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
@@ -578,7 +584,7 @@
               </div>
             </a>
 
-            <a href="https://www.youtube.com/watch?v=5gJfvawTQjY" onclick="openModal('5gJfvawTQjY', '제이시스메디칼 고주파 멜라닌 억제 기전'); return false;" class="group grid md:grid-cols-12 items-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
+            <a href="https://www.youtube.com/watch?v=5gJfvawTQjY" onclick="openModal('5gJfvawTQjY', '제이시스메디칼 고주파 멜라닌 억제 기전'); return false;" class="featured-project group grid md:grid-cols-12 items-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
               <div class="relative order-1 md:order-2 md:col-span-6 aspect-video overflow-hidden bg-slate-100">
                 <img src="./src/flux_work_01.jpg" alt="제이시스메디칼 고주파 멜라닌 억제 기전 시각화" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
                 <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
@@ -593,7 +599,7 @@
               </div>
             </a>
 
-            <a href="https://www.youtube.com/watch?v=z2G8yPKpNyI" onclick="openModal('z2G8yPKpNyI', '자생한방병원 안면신경마비 치료 기전'); return false;" class="group grid md:grid-cols-12 items-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
+            <a href="https://www.youtube.com/watch?v=z2G8yPKpNyI" onclick="openModal('z2G8yPKpNyI', '자생한방병원 안면신경마비 치료 기전'); return false;" class="featured-project group grid md:grid-cols-12 items-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:border-[#17367a] transition">
               <div class="relative md:col-span-6 aspect-video overflow-hidden bg-slate-100">
                 <img src="./src/flux_work_03.jpg" alt="자생한방병원 안면신경마비 치료 메디컬 애니메이션" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
                 <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
@@ -623,10 +629,10 @@
               <h2 class="section-title text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-5">
             <span class="cta-heading-first">플럭스와 함께</span><br>완성도 높은 프로젝트를 시작하세요<span class="title-dot">.</span>
           </h2>
-          <p class="text-slate-500 text-[15px] font-medium mb-8">
+          <p class="text-slate-600 text-[15px] font-medium leading-relaxed mb-8">
             정확한 컨셉 분석과 트렌디한 연출을 통해 클라이언트의 기획을 최상의 결과물로 구현합니다.
           </p>
-          <button onclick="navigateTo('contact')" class="btn-solid !px-8 !py-3">
+          <button onclick="navigateTo('contact')" class="btn-solid">
             <span class="btn-solid-inner"><i data-lucide="mail" class="w-4 h-4"></i> Contact Us</span>
           </button>
         </div>
@@ -636,7 +642,7 @@
     <div id="page-about" class="page-view pb-12">
       
       <div class="max-w-6xl mx-auto px-6 pt-12">
-        <div class="orbitron-breadcrumb mb-10 flex items-center text-[10px] md:text-[11px] text-slate-400">
+        <div class="orbitron-breadcrumb mb-10 flex items-center text-[9px] md:text-[10px] text-slate-400">
           <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-[#17367a] transition">Home</a>
           <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
           <span class="text-[#17367a]">About</span>
@@ -647,7 +653,7 @@
             <p class="orbitron-label text-[11px] tracking-[0.2em] text-[#17367a] uppercase mb-3">About FLUX</p>
           <h2 class="section-title text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-6">데이터의 정확성에<br>시각적 깊이를 더합니다<span class="title-dot">.</span></h2>
             <p class="text-slate-600 text-[16px] leading-relaxed mb-6">
-              플럭스(FLUX)는 폭넓은 프로젝트 경험과 확실한 실무 능력을 갖춘 영상 디자이너가 이끄는 메디컬·커머셜 시각화 전문 스튜디오입니다.
+              플럭스는 폭넓은 프로젝트 경험과 확실한 실무 능력을 갖춘 영상 디자이너가 이끄는 메디컬·커머셜 시각화 전문 스튜디오입니다.
             </p>
             <p class="text-slate-600 text-[16px] leading-relaxed">
               의료기기, 논문 기전, 대규모 병원 프로젝트 등 단순한 디자인을 넘어 복잡한 기전과 구동 원리를 완벽하게 이해하고 직관적인 결과물로 완성합니다.
@@ -773,7 +779,7 @@
 
     <div id="page-work" class="page-view py-12 px-6 max-w-6xl mx-auto">
       
-      <div class="orbitron-breadcrumb mb-6 flex items-center text-[10px] md:text-[11px] text-slate-400">
+      <div class="orbitron-breadcrumb mb-6 flex items-center text-[9px] md:text-[10px] text-slate-400">
         <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-[#17367a] transition">Home</a>
         <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
         <span class="text-[#17367a]">Work</span>
@@ -934,7 +940,7 @@
 
     <div id="page-contact" class="page-view py-12 px-6 max-w-6xl mx-auto">
       
-      <div class="orbitron-breadcrumb mb-10 flex items-center text-[10px] md:text-[11px] text-slate-400">
+      <div class="orbitron-breadcrumb mb-10 flex items-center text-[9px] md:text-[10px] text-slate-400">
         <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-[#17367a] transition">Home</a>
         <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
         <span class="text-[#17367a]">Contact</span>
@@ -1265,10 +1271,11 @@
       if (!kicker || !target) return;
 
       kicker.style.setProperty('letter-spacing', '0px', 'important');
-      const letterSpacingUnits = Math.max(kicker.textContent.trim().length, 1);
+      const characterGaps = Math.max(kicker.textContent.trim().length - 1, 1);
       const opticalTargetWidth = target.getBoundingClientRect().width * 0.98;
-      const spacing = Math.max(0, (opticalTargetWidth - kicker.getBoundingClientRect().width) / letterSpacingUnits);
+      const spacing = Math.max(0, (opticalTargetWidth - kicker.getBoundingClientRect().width) / characterGaps);
       kicker.style.setProperty('letter-spacing', `${spacing}px`, 'important');
+      kicker.style.marginRight = `-${spacing}px`;
     }
 
     if (document.fonts?.ready) {
